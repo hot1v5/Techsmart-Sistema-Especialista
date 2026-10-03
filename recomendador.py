@@ -440,48 +440,48 @@ def escolher_recomendacao_principal(recomendacoes):
         key=lambda item: prioridades.get(item, 0)
     )
 
-dados_cliente = coletar_dados()
+if __name__ == "__main__":
 
-(
-    recomendacoes_principais,
-    recomendacoes_complementares,
-    regras_ativadas
-) = motor_inferencia(dados_cliente)
+    dados_cliente = coletar_dados()
 
-recomendacoes_principais = list(
-    dict.fromkeys(recomendacoes_principais)
-)
+    (
+        recomendacoes_principais,
+        recomendacoes_complementares,
+        regras_ativadas
+    ) = motor_inferencia(dados_cliente)
 
-recomendacoes_complementares = list(
-    dict.fromkeys(recomendacoes_complementares)
-)
-
-recomendacao_principal = escolher_recomendacao_principal(
-    recomendacoes_principais
-)
-
-
-
-print("\n=== RESULTADO DO SISTEMA ESPECIALISTA ===")
-
-if recomendacao_principal:
-    print("\nRECOMENDAÇÃO PRINCIPAL:")
-    print("-", recomendacao_principal)
-
-    if recomendacoes_complementares:
-        print("\nRECOMENDAÇÕES COMPLEMENTARES:")
-
-        for item in recomendacoes_complementares:
-            print("-", item)
-
-    print("\n=== EXPLICAÇÃO DO RACIOCÍNIO ===")
-
-    for regra in regras_ativadas:
-        print("-", regra)
-
-else:
-    print(
-        "\nNão foi possível chegar a uma conclusão "
-        "com as informações fornecidas."
+    recomendacoes_principais = list(
+        dict.fromkeys(recomendacoes_principais)
     )
+
+    recomendacoes_complementares = list(
+        dict.fromkeys(recomendacoes_complementares)
+    )
+
+    recomendacao_principal = escolher_recomendacao_principal(
+        recomendacoes_principais
+    )
+
+    print("\n=== RESULTADO DO SISTEMA ESPECIALISTA ===")
+
+    if recomendacao_principal:
+        print("\nRECOMENDAÇÃO PRINCIPAL:")
+        print("-", recomendacao_principal)
+
+        if recomendacoes_complementares:
+            print("\nRECOMENDAÇÕES COMPLEMENTARES:")
+
+            for item in recomendacoes_complementares:
+                print("-", item)
+
+        print("\n=== EXPLICAÇÃO DO RACIOCÍNIO ===")
+
+        for regra in regras_ativadas:
+            print("-", regra)
+
+    else:
+        print(
+            "\nNão foi possível chegar a uma conclusão "
+            "com as informações fornecidas."
+        )
 
