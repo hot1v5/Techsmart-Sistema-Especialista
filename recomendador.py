@@ -418,6 +418,83 @@ def motor_inferencia(dados):
         regras_ativadas
     )
 
+def obter_configuracao(recomendacao):
+    configuracoes = {
+        "Computador básico": {
+            "Processador": "Intel Core i3 ou AMD Ryzen 3",
+            "Memória RAM": "8 GB",
+            "Armazenamento": "SSD 512 GB",
+            "Placa de vídeo": "Vídeo integrado",
+            "Perfil": "Estudos, internet, pacote Office e tarefas leves"
+        },
+
+        "Computador intermediário": {
+            "Processador": "Intel Core i5 ou AMD Ryzen 5",
+            "Memória RAM": "16 GB",
+            "Armazenamento": "SSD 512 GB",
+            "Placa de vídeo": "Integrada ou dedicada de entrada",
+            "Perfil": "Multitarefa, programação, trabalho e jogos leves"
+        },
+
+        "Computador para programação": {
+            "Processador": "Intel Core i5 ou AMD Ryzen 5",
+            "Memória RAM": "16 GB",
+            "Armazenamento": "SSD 512 GB ou 1 TB",
+            "Placa de vídeo": "Vídeo integrado",
+            "Perfil": "Desenvolvimento de software e multitarefa"
+        },
+
+        "Computador para programação de alto desempenho": {
+            "Processador": "Intel Core i7 ou AMD Ryzen 7",
+            "Memória RAM": "32 GB",
+            "Armazenamento": "SSD 1 TB",
+            "Placa de vídeo": "Dedicada opcional",
+            "Perfil": "IDE pesada, máquinas virtuais e múltiplos ambientes"
+        },
+
+        "Computador gamer": {
+            "Processador": "Intel Core i5 ou AMD Ryzen 5",
+            "Memória RAM": "16 GB",
+            "Armazenamento": "SSD 1 TB",
+            "Placa de vídeo": "GPU dedicada de nível intermediário",
+            "Perfil": "Jogos atuais em Full HD"
+        },
+
+        "Computador gamer de alto desempenho": {
+            "Processador": "Intel Core i7 ou AMD Ryzen 7",
+            "Memória RAM": "32 GB",
+            "Armazenamento": "SSD 1 TB",
+            "Placa de vídeo": "GPU dedicada de alto desempenho",
+            "Perfil": "Jogos pesados em alta qualidade e alta taxa de quadros"
+        },
+
+        "Computador para edição de vídeo": {
+            "Processador": "Intel Core i7 ou AMD Ryzen 7",
+            "Memória RAM": "32 GB",
+            "Armazenamento": "SSD 1 TB",
+            "Placa de vídeo": "GPU dedicada",
+            "Perfil": "Edição de vídeo e criação de conteúdo"
+        },
+
+        "Computador de alto desempenho": {
+            "Processador": "Intel Core i7/i9 ou AMD Ryzen 7/9",
+            "Memória RAM": "32 GB ou mais",
+            "Armazenamento": "SSD 1 TB ou mais",
+            "Placa de vídeo": "GPU dedicada de alto desempenho",
+            "Perfil": "Aplicações profissionais pesadas"
+        },
+
+        "Computador gamer de alto desempenho adequado também para programação": {
+            "Processador": "Intel Core i7 ou AMD Ryzen 7",
+            "Memória RAM": "32 GB",
+            "Armazenamento": "SSD 1 TB",
+            "Placa de vídeo": "GPU dedicada de alto desempenho",
+            "Perfil": "Jogos pesados, programação e multitarefa avançada"
+        }
+    }
+
+    return configuracoes.get(recomendacao)
+
 def escolher_recomendacao_principal(recomendacoes):
     prioridades = {
         "Computador básico": 1,

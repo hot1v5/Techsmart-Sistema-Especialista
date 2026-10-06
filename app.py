@@ -2,7 +2,8 @@ import streamlit as st
 
 from recomendador import (
     motor_inferencia,
-    escolher_recomendacao_principal
+    escolher_recomendacao_principal,
+    obter_configuracao
 )
 
 st.set_page_config(page_title="TechSmart Informática", page_icon="💻", layout="wide")
@@ -126,7 +127,12 @@ with col2:
 st.write("")
 botao = st.button("Analisar perfil e recomendar computador")
 
+recomendacoes_principais = []
+complementares = []
+regras_ativadas = []
+
 if botao:
+
     dados_cliente = {
         "orcamento": orcamento,
         "finalidade": finalidade,
@@ -142,22 +148,33 @@ if botao:
         "arquivos_grandes": arquivos_grandes
     }
 
-    # Atenção: ajustar esta linha se o motor devolver os dados em outra ordem
-    recomendacoes_principais, complementares, regras_ativadas = motor_inferencia(dados_cliente)
+    recomendacoes_principais, complementares, regras_ativadas = motor_inferencia(
+        dados_cliente
+    )
 
-    # remove repetidas mantendo a ordem
-    recomendacoes_principais = list(dict.fromkeys(recomendacoes_principais))
+    recomendacoes_principais = list(
+        dict.fromkeys(recomendacoes_principais)
+    )
+
+    complementares = list(
+        dict.fromkeys(complementares)
+    )
 
     if len(recomendacoes_principais) == 0:
-        st.markdown("""
-        <div class="card">
-            <b>Não encontramos uma recomendação para esse perfil.</b><br>
-            Tente alterar algumas respostas, como orçamento ou desempenho, e analise novamente.
-        </div>
-        """, unsafe_allow_html=True)
-    else:
-        principal = escolher_recomendacao_principal(recomendacoes_principais)
 
+        st.warning(
+            "Não encontramos uma recomendação para esse perfil."
+        )
+
+    else:
+
+        principal = escolher_recomendacao_principal(
+            recomendacoes_principais
+        )
+
+        configuracao = obter_configuracao(principal)
+
+        # RECOMENDAÇÃO PRINCIPAL
         st.markdown(f"""
         <div class="destaque">
             <p>RECOMENDAÇÃO PRINCIPAL</p>
@@ -165,36 +182,90 @@ if botao:
         </div>
         """, unsafe_allow_html=True)
 
+        # CONFIGURAÇÃO
+        if configuracao:
+            st.markdown("### 🖥️ Configuração sugerida")
+
+            st.write(
+                f"**Processador:** {configuracao['Processador']}"
+            )
+            st.write(
+                f"**Memória RAM:** {configuracao['Memória RAM']}"
+            )
+            st.write(
+                f"**Armazenamento:** {configuracao['Armazenamento']}"
+            )
+            st.write(
+                f"**Placa de vídeo:** {configuracao['Placa de vídeo']}"
+            )
+            st.write(
+                f"**Perfil:** {configuracao['Perfil']}"
+            )
+
+        # COMPLEMENTARES
         if complementares:
-            itens = "".join(f"<li>{item}</li>" for item in complementares)
+            items = "".join(
+                f"<li>{item}</li>"
+                for item in complementares
+            )
+
             st.markdown(f"""
             <div class="card">
                 <b>CONFIGURAÇÃO / RECOMENDAÇÕES COMPLEMENTARES</b>
-                <ul>{itens}</ul>
+                <ul>{items}</ul>
             </div>
             """, unsafe_allow_html=True)
 
-        with st.expander("Como o sistema chegou a essa conclusão?"):
+        # EXPLICAÇÃO
+        with st.expander(
+            "🧠 Como o sistema chegou a essa conclusão?",
+            expanded=True
+        ):
             for regra in regras_ativadas:
-                st.markdown(f"<div class='regra'>{regra}</div>", unsafe_allow_html=True)
+                st.info(regra)
 
-    # Resumo do que o usuário informou
-    st.subheader("Resumo dos fatos informados")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.write(f"**Orçamento:** R$ {orcamento}")
-        st.write(f"**Finalidade:** {finalidades[finalidade]}")
-        st.write(f"**Jogos:** {niveis_jogos[jogos]}")
-        st.write(f"**Programação:** {niveis_programacao[programacao]}")
-        st.write(f"**Edição:** {niveis_edicao[edicao]}")
-        st.write(f"**Multitarefa:** {niveis[multitarefa]}")
-    with col2:
-        st.write(f"**Resolução:** {resolucoes[resolucao]}")
-        st.write(f"**Armazenamento:** {niveis[armazenamento]}")
-        st.write(f"**Desempenho:** {desempenhos[desempenho]}")
-        st.write(f"**Máquina virtual:** {sim_nao[maquina_virtual]}")
-        st.write(f"**Ferramentas pesadas:** {sim_nao[ferramentas_pesadas]}")
-        st.write(f"**Arquivos grandes:** {sim_nao[arquivos_grandes]}")
+        # RESUMO DOS FATOS INFORMADOS
+        st.subheader("📋 Resumo dos fatos informados")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.write(f"**Orçamento:** R$ {orcamento:,.2f}")
+            st.write(f"**Finalidade:** {finalidades[finalidade]}")
+            st.write(f"**Jogos:** {niveis_jogos[jogos]}")
+            st.write(
+                f"**Programação:** "
+                f"{niveis_programacao[programacao]}"
+            )
+            st.write(
+                f"**Edição:** {niveis_edicao[edicao]}"
+            )
+            st.write(
+                f"**Multitarefa:** {niveis[multitarefa]}"
+            )
+
+        with col2:
+            st.write(
+                f"**Resolução:** {resolucoes[resolucao]}"
+            )
+            st.write(
+                f"**Armazenamento:** {niveis[armazenamento]}"
+            )
+            st.write(
+                f"**Desempenho:** {desempenhos[desempenho]}"
+            )
+            st.write(
+                f"**Máquina virtual:** "
+                f"{sim_nao[maquina_virtual]}"
+            )
+            st.write(
+                f"**Ferramentas pesadas:** "
+                f"{sim_nao[ferramentas_pesadas]}"
+            )
+            st.write(
+                f"**Arquivos grandes:** "
+                f"{sim_nao[arquivos_grandes]}"
+            )
 
 st.markdown(
     "<div class='rodape'>TechSmart Informática • Sistema Especialista desenvolvido para fins acadêmicos</div>",
