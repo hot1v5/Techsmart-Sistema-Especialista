@@ -2,7 +2,7 @@
 
 Sistema Especialista desenvolvido em Python e Streamlit para recomendar computadores com base no perfil, necessidades e orçamento do usuário.
 
-🎓 Contexto acadêmico
+## 🎓 Contexto acadêmico
 Projeto desenvolvido para a disciplina de Programação de Sistemas Especialistas, no curso de Ciência da Computação da Universidade Veiga de Almeida.
 
 ## 🎯 Objetivo
@@ -35,6 +35,12 @@ Motor de inferência
    ↓
 Recomendação
 ```
+## 🏗️ Arquitetura
+
+- `app.py`: responsável pela interface em Streamlit.
+- `recomendador.py`: contém a base de conhecimento, motor de inferência, prioridades e configurações sugeridas.
+- `requirements.txt`: dependências do projeto.
+- `.gitignore`: arquivos ignorados pelo Git.
 
 ## 📸 Interface do sistema
 
@@ -50,7 +56,7 @@ Recomendação
 
 
 
-💻 O sistema considera
+## 💻 O sistema considera
 - Orçamento
 - Finalidade de uso
 - Jogos
@@ -69,31 +75,32 @@ Recomendação
 - Git
 - GitHub
 
-▶️ Como executar
-1. Clone o repositório
+## ▶️ Como executar
+
+### 1. Clone o repositório
 git clone https://github.com/hot1v5/Techsmart-Sistema-Especialista.git
 
-2. Entre na pasta
+### 2. Entre na pasta
 cd Techsmart-Sistema-Especialista
 
-3. Crie um ambiente virtual
+### 3. Crie um ambiente virtual
 Windows:
 python -m venv .venv
 
-4. Ative o ambiente virtual
+### 4. Ative o ambiente virtual
 PowerShell:
 .\.venv\Scripts\Activate.ps1
 
-5. Instale as dependências
+### 5. Instale as dependências
 python -m pip install -r requirements.txt
 
-6. Execute a aplicação
+### 6. Execute a aplicação
 python -m streamlit run app.py
 
 Após a execução, o Streamlit disponibilizará um endereço local, normalmente:
 http://localhost:8501
 
-🧪 Testes
+## 🧪 Testes
 O sistema foi testado nos seguintes cenários:
 - Computador básico
 - Trabalho com multitarefa
