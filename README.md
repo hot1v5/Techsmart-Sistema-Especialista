@@ -2,6 +2,9 @@
 
 Sistema Especialista desenvolvido em Python e Streamlit para recomendar computadores com base no perfil, necessidades e orçamento do usuário.
 
+🎓 Contexto acadêmico
+Projeto desenvolvido para a disciplina de Programação de Sistemas Especialistas, no curso de Ciência da Computação da Universidade Veiga de Almeida.
+
 ## 🎯 Objetivo
 
 Auxiliar clientes de uma loja de informática na escolha de um computador adequado às suas necessidades.
@@ -32,6 +35,21 @@ Motor de inferência
    ↓
 Recomendação
 ```
+
+## 📸 Interface do sistema
+
+### Tela inicial
+
+<img width="760" height="908" alt="tela Principal" src="https://github.com/user-attachments/assets/aa1ab4b9-b661-4fb2-863d-ccdb1b2e40f3" />
+
+
+
+### Resultado da recomendação
+
+<img width="793" height="812" alt="configuração sugerida" src="https://github.com/user-attachments/assets/b65b7366-4dbd-4294-9778-3d953968a3bf" />
+
+
+
 💻 O sistema considera
 - Orçamento
 - Finalidade de uso
@@ -85,5 +103,3 @@ O sistema foi testado nos seguintes cenários:
 - Orçamento insuficiente
 - Caso sem conclusão
 
-🎓 Contexto acadêmico
-Projeto desenvolvido para a disciplina de Programação de Sistemas Especialistas, no curso de Ciência da Computação da Universidade Veiga de Almeida.
