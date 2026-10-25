@@ -570,3 +570,4 @@ st.markdown("""
 TechSmart Informática • Sistema Especialista desenvolvido para fins acadêmicos
 </div>
 """, unsafe_allow_html=True)
+
